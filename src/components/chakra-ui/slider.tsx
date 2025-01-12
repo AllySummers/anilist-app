@@ -1,13 +1,13 @@
 import { Slider as ChakraSlider, For, HStack } from '@chakra-ui/react';
-import * as React from 'react';
+import { forwardRef, type ReactNode } from 'react';
 
 export interface SliderProps extends ChakraSlider.RootProps {
-	marks?: Array<number | { value: number; label: React.ReactNode }>;
-	label?: React.ReactNode;
+	marks?: Array<number | { value: number; label: ReactNode }>;
+	label?: ReactNode;
 	showValue?: boolean;
 }
 
-export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(function Slider(props, ref) {
+export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(props, ref) {
 	const { marks: marksProp, label, showValue, ...rest } = props;
 	const value = props.defaultValue ?? props.value;
 
@@ -53,27 +53,25 @@ function SliderThumbs(props: { value?: number[] }) {
 }
 
 interface SliderMarksProps {
-	marks?: Array<number | { value: number; label: React.ReactNode }>;
+	marks?: Array<number | { value: number; label: ReactNode }>;
 }
 
-const SliderMarks = React.forwardRef<HTMLDivElement, SliderMarksProps>(
-	function SliderMarks(props, ref) {
-		const { marks } = props;
-		if (!marks?.length) return null;
+const SliderMarks = forwardRef<HTMLDivElement, SliderMarksProps>(function SliderMarks(props, ref) {
+	const { marks } = props;
+	if (!marks?.length) return null;
 
-		return (
-			<ChakraSlider.MarkerGroup ref={ref}>
-				{marks.map((mark, index) => {
-					const value = typeof mark === 'number' ? mark : mark.value;
-					const label = typeof mark === 'number' ? undefined : mark.label;
-					return (
-						<ChakraSlider.Marker key={index} value={value}>
-							<ChakraSlider.MarkerIndicator />
-							{label}
-						</ChakraSlider.Marker>
-					);
-				})}
-			</ChakraSlider.MarkerGroup>
-		);
-	},
-);
+	return (
+		<ChakraSlider.MarkerGroup ref={ref}>
+			{marks.map((mark, index) => {
+				const value = typeof mark === 'number' ? mark : mark.value;
+				const label = typeof mark === 'number' ? undefined : mark.label;
+				return (
+					<ChakraSlider.Marker key={index} value={value}>
+						<ChakraSlider.MarkerIndicator />
+						{label}
+					</ChakraSlider.Marker>
+				);
+			})}
+		</ChakraSlider.MarkerGroup>
+	);
+});

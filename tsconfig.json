@@ -19,9 +19,19 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/gql/*": ["./src/graphql/__generated__/*"],
+      "@/gql": ["./src/graphql/types.ts"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "./src",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "./next.config.ts",
+    "./tailwind.config.ts",
+    "src/middleware.ts",
+    "codegen.ts"
+  ],
   "exclude": ["node_modules"]
 }

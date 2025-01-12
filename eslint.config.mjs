@@ -16,6 +16,12 @@ const config = tseslint.config([
 	...compat.extends('next/core-web-vitals', 'next/typescript'),
 	prettierConfig,
 	{
+		settings: {
+			'jsx-a11y': {
+				// this stops warnings about alt text when using `asChild`, e.g. for the chakra ui Image + next Image component
+				polymorphicPropName: 'asChild',
+			},
+		},
 		rules: {
 			'import/order': [
 				'error',
@@ -73,6 +79,13 @@ const config = tseslint.config([
 				},
 				tsconfigRootDir: import.meta.dirname,
 			},
+		},
+	},
+	{
+		files: ['src/graphql/__generated__/**/*.ts', 'src/graphql/__generated__/**/*.tsx'],
+		rules: {
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-redundant-type-constituents': 'off',
 		},
 	},
 ]);

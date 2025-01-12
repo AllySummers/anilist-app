@@ -1,13 +1,13 @@
 import { Popover as ChakraPopover, Portal } from '@chakra-ui/react';
-import * as React from 'react';
-import { CloseButton } from './close-button';
+import { forwardRef, type RefObject } from 'react';
+import { CloseButton } from '@/components/chakra-ui/close-button';
 
 interface PopoverContentProps extends ChakraPopover.ContentProps {
 	portalled?: boolean;
-	portalRef?: React.RefObject<HTMLElement>;
+	portalRef?: RefObject<HTMLElement>;
 }
 
-export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
+export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
 	function PopoverContent(props, ref) {
 		const { portalled = true, portalRef, ...rest } = props;
 		return (
@@ -20,7 +20,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
 	},
 );
 
-export const PopoverArrow = React.forwardRef<HTMLDivElement, ChakraPopover.ArrowProps>(
+export const PopoverArrow = forwardRef<HTMLDivElement, ChakraPopover.ArrowProps>(
 	function PopoverArrow(props, ref) {
 		return (
 			<ChakraPopover.Arrow {...props} ref={ref}>
@@ -30,23 +30,22 @@ export const PopoverArrow = React.forwardRef<HTMLDivElement, ChakraPopover.Arrow
 	},
 );
 
-export const PopoverCloseTrigger = React.forwardRef<
-	HTMLButtonElement,
-	ChakraPopover.CloseTriggerProps
->(function PopoverCloseTrigger(props, ref) {
-	return (
-		<ChakraPopover.CloseTrigger
-			position="absolute"
-			top="1"
-			insetEnd="1"
-			{...props}
-			asChild
-			ref={ref}
-		>
-			<CloseButton size="sm" />
-		</ChakraPopover.CloseTrigger>
-	);
-});
+export const PopoverCloseTrigger = forwardRef<HTMLButtonElement, ChakraPopover.CloseTriggerProps>(
+	function PopoverCloseTrigger(props, ref) {
+		return (
+			<ChakraPopover.CloseTrigger
+				position="absolute"
+				top="1"
+				insetEnd="1"
+				{...props}
+				asChild
+				ref={ref}
+			>
+				<CloseButton size="sm" />
+			</ChakraPopover.CloseTrigger>
+		);
+	},
+);
 
 export const PopoverTitle = ChakraPopover.Title;
 export const PopoverDescription = ChakraPopover.Description;
