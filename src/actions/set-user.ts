@@ -3,6 +3,7 @@
 import { setCookie } from 'cookies-next/server';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { cookieOptions } from '@/config/cookie-options';
 import { parseUserData, type ParsedUserData } from '@/utils/parse-user-data';
 
 export const setUser = async (
@@ -16,10 +17,7 @@ export const setUser = async (
 
 	await setCookie('user-data', JSON.stringify(userData.values), {
 		cookies,
-		httpOnly: true,
-		secure: process.env.NODE_ENV === 'production',
-		sameSite: 'lax',
-		path: '/',
+		...cookieOptions,
 	});
 
 	redirect('/anime');

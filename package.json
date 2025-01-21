@@ -10,20 +10,21 @@
     "codegen": "graphql-codegen"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.5",
+    "@apollo/client": "^3.12.6",
     "@apollo/experimental-nextjs-app-support": "^0.11.7",
-    "@chakra-ui/react": "^3.3.0",
+    "@chakra-ui/react": "^3.4.0",
     "@emotion/react": "^11.14.0",
-    "cookies-next": "^5.0.2",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "next": "15.1.4",
+    "cookies-next": "^5.1.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "lucide-react": "^0.473.0",
+    "next": "15.1.5",
     "next-themes": "^0.4.4",
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
-    "typescript-eslint": "^8.19.1"
+    "typescript-eslint": "^8.21.0"
   },
   "devDependencies": {
     "@chakra-ui/icons": "^2.2.4",
@@ -37,7 +38,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.1.4",
+    "eslint-config-next": "15.1.5",
     "graphql": "^16.10.0",
     "graphql-tag": "^2.12.6",
     "postcss": "^8",

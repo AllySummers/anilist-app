@@ -1,13 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/actions/get-user';
 
 const protectedRoutes = ['/profile', '/anime'];
 
 export default async function middleware(req: NextRequest) {
+	const res = NextResponse.next();
+
 	const path = req.nextUrl.pathname;
 	const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route));
 
 	const user = await getUser();
+
+	if (user) {
+		res.cookies.set('user-data', JSON.stringify(user), { httpOnly: true, path: '/' });
+	}
 
 	// Redirect to /register if the user is not authenticated
 	if (isProtectedRoute && !user) {
@@ -23,7 +29,7 @@ export default async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL('/register', req.nextUrl));
 	}
 
-	return NextResponse.next();
+	return res;
 }
 
 // Routes Middleware should not run on

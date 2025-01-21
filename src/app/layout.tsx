@@ -1,8 +1,11 @@
-import { Container, SkipNavLink } from '@chakra-ui/react';
+import { Container, SkipNavLink, Text } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { Provider as ChakraProvider } from '@/components/chakra-ui/provider';
+import Link from 'next/link';
 import { ApolloWrapper } from '@/apollo/wrapper';
+import { Provider as ChakraProvider } from '@/components/chakra-ui/provider';
+import { Navigation } from '@/components/ui/navigation/navigation';
+import { navigationItems } from '@/config/navigation';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -32,7 +35,15 @@ export default function RootLayout({
 				<ApolloWrapper>
 					<ChakraProvider>
 						<SkipNavLink>Skip to Content</SkipNavLink>
-						<Container m="8">{children}</Container>
+						<Navigation
+							brand={
+								<Link href="/">
+									<Text>Anime Explorer</Text>
+								</Link>
+							}
+							items={navigationItems}
+						/>
+						<Container>{children}</Container>
 					</ChakraProvider>
 				</ApolloWrapper>
 			</body>
