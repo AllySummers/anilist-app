@@ -1,14 +1,20 @@
 'use client';
+
 import { IconButton } from '@chakra-ui/react';
-import { User } from 'lucide-react';
+import { Separator } from '@chakra-ui/react';
 import Link from 'next/link';
-import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from '@/components/chakra-ui/menu';
-import { useUserData } from '@/hooks/use-user-data';
+import { Avatar } from '@/components/chakra-ui/avatar';
+import {
+	MenuContent,
+	MenuItem,
+	MenuItemGroup,
+	MenuRoot,
+	MenuTrigger,
+} from '@/components/chakra-ui/menu';
+import { useUser } from '@/context/user';
 
 export const ProfileMenu = () => {
-	const userData = useUserData();
-
-	console.log(userData);
+	const userData = useUser();
 
 	return (
 		<MenuRoot>
@@ -23,19 +29,21 @@ export const ProfileMenu = () => {
 					{/* if users had a profile picture, we should
 					change this to an iamge component if it is
 					 exists, but using a static icon for now. */}
-					<User />
+					<Avatar name={userData?.username} />
 				</IconButton>
 			</MenuTrigger>
 			<MenuContent>
 				{userData ? (
 					<>
-						<MenuItem value="profile-button" asChild>
-							<Link href="/profile">Profile</Link>
-						</MenuItem>
-
-						<MenuItem value="logout-button" asChild>
-							<Link href="/logout">Logout</Link>
-						</MenuItem>
+						<MenuItemGroup title={`${userData.username}'s Account`}>
+							<MenuItem value="profile-button" asChild>
+								<Link href="/profile">Profile</Link>
+							</MenuItem>
+							<Separator />
+							<MenuItem value="logout-button" asChild>
+								<Link href="/logout">Logout</Link>
+							</MenuItem>
+						</MenuItemGroup>
 					</>
 				) : (
 					<MenuItem value="login-button" asChild>

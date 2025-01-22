@@ -1,13 +1,20 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/actions/get-user';
 
-const protectedRoutes = ['/profile', '/anime'];
+// using unprotected routes instead of protected routes because
+// `/` is a protected route, and everything starts with `/`, and
+// the logic is less complicated this way
+const unprotectedRoutes = [
+	'/register',
+	// should logout be an unprotected route?
+	'/logout',
+];
 
 export default async function middleware(req: NextRequest) {
 	const res = NextResponse.next();
 
 	const path = req.nextUrl.pathname;
-	const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route));
+	const isProtectedRoute = !unprotectedRoutes.some((route) => path.startsWith(route));
 
 	const user = await getUser();
 
@@ -20,13 +27,9 @@ export default async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL('/register', req.nextUrl));
 	}
 
-	// Redirect to /anime if the user is authenticated
-	if (user && (path === '/' || path.startsWith('/register'))) {
-		return NextResponse.redirect(new URL('/anime', req.nextUrl));
-	}
-
-	if (path === '/') {
-		return NextResponse.redirect(new URL('/register', req.nextUrl));
+	// Redirect to / if the user is authenticated and tries to access /register
+	if (user && path.startsWith('/register')) {
+		return NextResponse.redirect(new URL('/', req.nextUrl));
 	}
 
 	return res;

@@ -20,5 +20,5 @@ export const setUser = async (
 		...cookieOptions,
 	});
 
-	redirect('/anime');
+	redirect('/');
 };

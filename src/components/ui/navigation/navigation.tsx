@@ -1,4 +1,4 @@
-import { RequiredKeys } from '@/types/key-utility-types';
+import { RequiredKeys } from '@/types/utility-types';
 import { DesktopNavigation } from './desktop-navigation';
 import { MobileNavigation } from './mobile-navigation';
 

@@ -1,6 +1,7 @@
 import { VStack, Heading } from '@chakra-ui/react';
 import { getUser } from '@/actions/get-user';
 import { ProfileForm } from '@/components/profile-form';
+import { siteInfo } from '@/config/site';
 
 export default async function ProfilePage() {
 	const user = await getUser();
@@ -14,7 +15,7 @@ export default async function ProfilePage() {
 		<VStack gap={12}>
 			<Heading as="h1">{user.username}&apos;s Profile</Heading>
 			<ProfileForm
-				legend="Anime Explorer Profile Form"
+				legend={`${siteInfo.title} Profile Form`}
 				helperText="Please update your profile information below."
 				defaultValues={user}
 			/>

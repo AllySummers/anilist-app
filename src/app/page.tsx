@@ -1,10 +1,6 @@
-import { Spinner, VStack, Text } from '@chakra-ui/react';
+import { Hero } from '@/components/ui/hero/hero';
+import { siteInfo } from '@/config/site';
 
 export default function HomePage() {
-	return (
-		<VStack>
-			<Spinner />
-			<Text>Loading Anime Browser</Text>
-		</VStack>
-	);
+	return <Hero heading={`Welcome to ${siteInfo.title}!`} />;
 }
