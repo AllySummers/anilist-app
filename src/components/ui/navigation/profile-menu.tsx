@@ -16,7 +16,7 @@ export const ProfileMenu = () => {
 	const user = useUser();
 
 	return (
-		<MenuRoot>
+		<MenuRoot positioning={{ placement: 'bottom-start' }}>
 			<MenuTrigger asChild>
 				<IconButton
 					asChild
@@ -33,17 +33,15 @@ export const ProfileMenu = () => {
 			</MenuTrigger>
 			<MenuContent>
 				{user?.username ? (
-					<>
-						<MenuItemGroup title={`${user.username}'s Account`}>
-							<MenuItem value="profile-button" asChild>
-								<Link href="/profile">Profile</Link>
-							</MenuItem>
-							<Separator />
-							<MenuItem value="logout-button" asChild>
-								<Link href="/logout">Logout</Link>
-							</MenuItem>
-						</MenuItemGroup>
-					</>
+					<MenuItemGroup title={`${user.username}'s Account`}>
+						<MenuItem value="profile-button" asChild>
+							<Link href="/profile">Profile</Link>
+						</MenuItem>
+						<Separator />
+						<MenuItem value="logout-button" asChild>
+							<Link href="/logout">Logout</Link>
+						</MenuItem>
+					</MenuItemGroup>
 				) : (
 					<MenuItem value="login-button" asChild>
 						<Link href="/register">Login</Link>
