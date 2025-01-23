@@ -18,13 +18,7 @@ export const ProfileMenu = () => {
 	return (
 		<MenuRoot positioning={{ placement: 'bottom-start' }}>
 			<MenuTrigger asChild>
-				<IconButton
-					asChild
-					variant="ghost"
-					size="sm"
-					aria-label="Profile menu"
-					rounded="full"
-				>
+				<IconButton variant="ghost" size="sm" aria-label="Profile menu" rounded="full">
 					{/* if users had a profile picture, we should
 					change this to an iamge component if it is
 					 exists, but using a static icon for now. */}
