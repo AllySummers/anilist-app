@@ -14,136 +14,252 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type SearchAnilistQueryVariables = Types.Exact<{
-  page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  id?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  type?: Types.InputMaybe<Types.MediaType>;
-  isAdult?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
-  search?: Types.InputMaybe<Types.Scalars['String']['input']>;
-  format?: Types.InputMaybe<Array<Types.InputMaybe<Types.MediaFormat>> | Types.InputMaybe<Types.MediaFormat>>;
-  status?: Types.InputMaybe<Types.MediaStatus>;
-  countryOfOrigin?: Types.InputMaybe<Types.Scalars['CountryCode']['input']>;
-  source?: Types.InputMaybe<Types.MediaSource>;
-  season?: Types.InputMaybe<Types.MediaSeason>;
-  seasonYear?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  year?: Types.InputMaybe<Types.Scalars['String']['input']>;
-  onList?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
-  yearLesser?: Types.InputMaybe<Types.Scalars['FuzzyDateInt']['input']>;
-  yearGreater?: Types.InputMaybe<Types.Scalars['FuzzyDateInt']['input']>;
-  episodeLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  episodeGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  durationLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  durationGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  chapterLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  chapterGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  volumeLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  volumeGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  licensedBy?: Types.InputMaybe<Array<Types.InputMaybe<Types.Scalars['Int']['input']>> | Types.InputMaybe<Types.Scalars['Int']['input']>>;
-  isLicensed?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
-  genres?: Types.InputMaybe<Array<Types.InputMaybe<Types.Scalars['String']['input']>> | Types.InputMaybe<Types.Scalars['String']['input']>>;
-  excludedGenres?: Types.InputMaybe<Array<Types.InputMaybe<Types.Scalars['String']['input']>> | Types.InputMaybe<Types.Scalars['String']['input']>>;
-  tags?: Types.InputMaybe<Array<Types.InputMaybe<Types.Scalars['String']['input']>> | Types.InputMaybe<Types.Scalars['String']['input']>>;
-  excludedTags?: Types.InputMaybe<Array<Types.InputMaybe<Types.Scalars['String']['input']>> | Types.InputMaybe<Types.Scalars['String']['input']>>;
-  minimumTagRank?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  sort?: Types.InputMaybe<Array<Types.InputMaybe<Types.MediaSort>> | Types.InputMaybe<Types.MediaSort>>;
+	page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	id?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	type?: Types.InputMaybe<Types.MediaType>;
+	isAdult?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
+	search?: Types.InputMaybe<Types.Scalars['String']['input']>;
+	format?: Types.InputMaybe<
+		Array<Types.InputMaybe<Types.MediaFormat>> | Types.InputMaybe<Types.MediaFormat>
+	>;
+	status?: Types.InputMaybe<Types.MediaStatus>;
+	countryOfOrigin?: Types.InputMaybe<Types.Scalars['CountryCode']['input']>;
+	source?: Types.InputMaybe<Types.MediaSource>;
+	season?: Types.InputMaybe<Types.MediaSeason>;
+	seasonYear?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	year?: Types.InputMaybe<Types.Scalars['String']['input']>;
+	onList?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
+	yearLesser?: Types.InputMaybe<Types.Scalars['FuzzyDateInt']['input']>;
+	yearGreater?: Types.InputMaybe<Types.Scalars['FuzzyDateInt']['input']>;
+	episodeLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	episodeGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	durationLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	durationGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	chapterLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	chapterGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	volumeLesser?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	volumeGreater?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	licensedBy?: Types.InputMaybe<
+		| Array<Types.InputMaybe<Types.Scalars['Int']['input']>>
+		| Types.InputMaybe<Types.Scalars['Int']['input']>
+	>;
+	isLicensed?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
+	genres?: Types.InputMaybe<
+		| Array<Types.InputMaybe<Types.Scalars['String']['input']>>
+		| Types.InputMaybe<Types.Scalars['String']['input']>
+	>;
+	excludedGenres?: Types.InputMaybe<
+		| Array<Types.InputMaybe<Types.Scalars['String']['input']>>
+		| Types.InputMaybe<Types.Scalars['String']['input']>
+	>;
+	tags?: Types.InputMaybe<
+		| Array<Types.InputMaybe<Types.Scalars['String']['input']>>
+		| Types.InputMaybe<Types.Scalars['String']['input']>
+	>;
+	excludedTags?: Types.InputMaybe<
+		| Array<Types.InputMaybe<Types.Scalars['String']['input']>>
+		| Types.InputMaybe<Types.Scalars['String']['input']>
+	>;
+	minimumTagRank?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	sort?: Types.InputMaybe<
+		Array<Types.InputMaybe<Types.MediaSort>> | Types.InputMaybe<Types.MediaSort>
+	>;
 }>;
 
-
-export type SearchAnilistQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', pageInfo?: { __typename?: 'PageInfo', total?: number | null, perPage?: number | null, currentPage?: number | null, lastPage?: number | null, hasNextPage?: boolean | null } | null, media?: Array<{ __typename?: 'Media', id: number, bannerImage?: string | null, season?: Types.MediaSeason | null, seasonYear?: number | null, description?: string | null, type?: Types.MediaType | null, format?: Types.MediaFormat | null, status?: Types.MediaStatus | null, episodes?: number | null, duration?: number | null, genres?: Array<string | null> | null, isAdult?: boolean | null, popularity?: number | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null, large?: string | null, color?: string | null } | null, startDate?: { __typename?: 'FuzzyDate', year?: number | null, month?: number | null, day?: number | null } | null, endDate?: { __typename?: 'FuzzyDate', year?: number | null, month?: number | null, day?: number | null } | null, nextAiringEpisode?: { __typename?: 'AiringSchedule', airingAt: number, timeUntilAiring: number, episode: number } | null, studios?: { __typename?: 'StudioConnection', edges?: Array<{ __typename?: 'StudioEdge', isMain: boolean, node?: { __typename?: 'Studio', id: number, name: string } | null } | null> | null } | null } | null> | null } | null };
-
+export type SearchAnilistQuery = {
+	__typename?: 'Query';
+	Page?: {
+		__typename?: 'Page';
+		pageInfo?: {
+			__typename?: 'PageInfo';
+			total?: number | null;
+			perPage?: number | null;
+			currentPage?: number | null;
+			lastPage?: number | null;
+			hasNextPage?: boolean | null;
+		} | null;
+		media?: Array<{
+			__typename?: 'Media';
+			id: number;
+			bannerImage?: string | null;
+			season?: Types.MediaSeason | null;
+			seasonYear?: number | null;
+			description?: string | null;
+			type?: Types.MediaType | null;
+			format?: Types.MediaFormat | null;
+			status?: Types.MediaStatus | null;
+			episodes?: number | null;
+			duration?: number | null;
+			genres?: Array<string | null> | null;
+			isAdult?: boolean | null;
+			popularity?: number | null;
+			title?: {
+				__typename?: 'MediaTitle';
+				romaji?: string | null;
+				english?: string | null;
+				native?: string | null;
+			} | null;
+			coverImage?: {
+				__typename?: 'MediaCoverImage';
+				extraLarge?: string | null;
+				large?: string | null;
+				color?: string | null;
+			} | null;
+			startDate?: {
+				__typename?: 'FuzzyDate';
+				year?: number | null;
+				month?: number | null;
+				day?: number | null;
+			} | null;
+			endDate?: {
+				__typename?: 'FuzzyDate';
+				year?: number | null;
+				month?: number | null;
+				day?: number | null;
+			} | null;
+			nextAiringEpisode?: {
+				__typename?: 'AiringSchedule';
+				airingAt: number;
+				timeUntilAiring: number;
+				episode: number;
+			} | null;
+			studios?: {
+				__typename?: 'StudioConnection';
+				edges?: Array<{
+					__typename?: 'StudioEdge';
+					isMain: boolean;
+					node?: { __typename?: 'Studio'; id: number; name: string } | null;
+				} | null> | null;
+			} | null;
+		} | null> | null;
+	} | null;
+};
 
 export const SearchAnilistDocument = gql`
-    query SearchAnilist($page: Int = 1, $id: Int, $type: MediaType, $isAdult: Boolean = false, $search: String, $format: [MediaFormat], $status: MediaStatus, $countryOfOrigin: CountryCode, $source: MediaSource, $season: MediaSeason, $seasonYear: Int, $year: String, $onList: Boolean, $yearLesser: FuzzyDateInt, $yearGreater: FuzzyDateInt, $episodeLesser: Int, $episodeGreater: Int, $durationLesser: Int, $durationGreater: Int, $chapterLesser: Int, $chapterGreater: Int, $volumeLesser: Int, $volumeGreater: Int, $licensedBy: [Int], $isLicensed: Boolean, $genres: [String], $excludedGenres: [String], $tags: [String], $excludedTags: [String], $minimumTagRank: Int, $sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]) {
-  Page(page: $page, perPage: 20) {
-    pageInfo {
-      total
-      perPage
-      currentPage
-      lastPage
-      hasNextPage
-    }
-    media(
-      id: $id
-      type: $type
-      season: $season
-      format_in: $format
-      status: $status
-      countryOfOrigin: $countryOfOrigin
-      source: $source
-      search: $search
-      onList: $onList
-      seasonYear: $seasonYear
-      startDate_like: $year
-      startDate_lesser: $yearLesser
-      startDate_greater: $yearGreater
-      episodes_lesser: $episodeLesser
-      episodes_greater: $episodeGreater
-      duration_lesser: $durationLesser
-      duration_greater: $durationGreater
-      chapters_lesser: $chapterLesser
-      chapters_greater: $chapterGreater
-      volumes_lesser: $volumeLesser
-      volumes_greater: $volumeGreater
-      licensedById_in: $licensedBy
-      isLicensed: $isLicensed
-      genre_in: $genres
-      genre_not_in: $excludedGenres
-      tag_in: $tags
-      tag_not_in: $excludedTags
-      minimumTagRank: $minimumTagRank
-      sort: $sort
-      isAdult: $isAdult
-    ) {
-      id
-      title {
-        romaji
-        english
-        native
-      }
-      coverImage {
-        extraLarge
-        large
-        color
-      }
-      startDate {
-        year
-        month
-        day
-      }
-      endDate {
-        year
-        month
-        day
-      }
-      bannerImage
-      season
-      seasonYear
-      description
-      type
-      format
-      status(version: 2)
-      episodes
-      duration
-      genres
-      isAdult
-      popularity
-      nextAiringEpisode {
-        airingAt
-        timeUntilAiring
-        episode
-      }
-      studios(isMain: true) {
-        edges {
-          isMain
-          node {
-            id
-            name
-          }
-        }
-      }
-    }
-  }
-}
-    `;
+	query SearchAnilist(
+		$page: Int = 1
+		$id: Int
+		$type: MediaType
+		$isAdult: Boolean = false
+		$search: String
+		$format: [MediaFormat]
+		$status: MediaStatus
+		$countryOfOrigin: CountryCode
+		$source: MediaSource
+		$season: MediaSeason
+		$seasonYear: Int
+		$year: String
+		$onList: Boolean
+		$yearLesser: FuzzyDateInt
+		$yearGreater: FuzzyDateInt
+		$episodeLesser: Int
+		$episodeGreater: Int
+		$durationLesser: Int
+		$durationGreater: Int
+		$chapterLesser: Int
+		$chapterGreater: Int
+		$volumeLesser: Int
+		$volumeGreater: Int
+		$licensedBy: [Int]
+		$isLicensed: Boolean
+		$genres: [String]
+		$excludedGenres: [String]
+		$tags: [String]
+		$excludedTags: [String]
+		$minimumTagRank: Int
+		$sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]
+	) {
+		Page(page: $page, perPage: 20) {
+			pageInfo {
+				total
+				perPage
+				currentPage
+				lastPage
+				hasNextPage
+			}
+			media(
+				id: $id
+				type: $type
+				season: $season
+				format_in: $format
+				status: $status
+				countryOfOrigin: $countryOfOrigin
+				source: $source
+				search: $search
+				onList: $onList
+				seasonYear: $seasonYear
+				startDate_like: $year
+				startDate_lesser: $yearLesser
+				startDate_greater: $yearGreater
+				episodes_lesser: $episodeLesser
+				episodes_greater: $episodeGreater
+				duration_lesser: $durationLesser
+				duration_greater: $durationGreater
+				chapters_lesser: $chapterLesser
+				chapters_greater: $chapterGreater
+				volumes_lesser: $volumeLesser
+				volumes_greater: $volumeGreater
+				licensedById_in: $licensedBy
+				isLicensed: $isLicensed
+				genre_in: $genres
+				genre_not_in: $excludedGenres
+				tag_in: $tags
+				tag_not_in: $excludedTags
+				minimumTagRank: $minimumTagRank
+				sort: $sort
+				isAdult: $isAdult
+			) {
+				id
+				title {
+					romaji
+					english
+					native
+				}
+				coverImage {
+					extraLarge
+					large
+					color
+				}
+				startDate {
+					year
+					month
+					day
+				}
+				endDate {
+					year
+					month
+					day
+				}
+				bannerImage
+				season
+				seasonYear
+				description
+				type
+				format
+				status(version: 2)
+				episodes
+				duration
+				genres
+				isAdult
+				popularity
+				nextAiringEpisode {
+					airingAt
+					timeUntilAiring
+					episode
+				}
+				studios(isMain: true) {
+					edges {
+						isMain
+						node {
+							id
+							name
+						}
+					}
+				}
+			}
+		}
+	}
+`;
 
 /**
  * __useSearchAnilistQuery__
@@ -191,25 +307,46 @@ export const SearchAnilistDocument = gql`
  *   },
  * });
  */
-export function useSearchAnilistQuery(baseOptions?: Apollo.QueryHookOptions<SearchAnilistQuery, SearchAnilistQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SearchAnilistQuery, SearchAnilistQueryVariables>(SearchAnilistDocument, options);
-      }
-export function useSearchAnilistLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchAnilistQuery, SearchAnilistQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SearchAnilistQuery, SearchAnilistQueryVariables>(SearchAnilistDocument, options);
-        }
-export function useSearchAnilistSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<SearchAnilistQuery, SearchAnilistQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<SearchAnilistQuery, SearchAnilistQueryVariables>(SearchAnilistDocument, options);
-        }
+export function useSearchAnilistQuery(
+	baseOptions?: Apollo.QueryHookOptions<SearchAnilistQuery, SearchAnilistQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<SearchAnilistQuery, SearchAnilistQueryVariables>(
+		SearchAnilistDocument,
+		options,
+	);
+}
+export function useSearchAnilistLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<SearchAnilistQuery, SearchAnilistQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<SearchAnilistQuery, SearchAnilistQueryVariables>(
+		SearchAnilistDocument,
+		options,
+	);
+}
+export function useSearchAnilistSuspenseQuery(
+	baseOptions?:
+		| Apollo.SkipToken
+		| Apollo.SuspenseQueryHookOptions<SearchAnilistQuery, SearchAnilistQueryVariables>,
+) {
+	const options =
+		baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+	return Apollo.useSuspenseQuery<SearchAnilistQuery, SearchAnilistQueryVariables>(
+		SearchAnilistDocument,
+		options,
+	);
+}
 export type SearchAnilistQueryHookResult = ReturnType<typeof useSearchAnilistQuery>;
 export type SearchAnilistLazyQueryHookResult = ReturnType<typeof useSearchAnilistLazyQuery>;
 export type SearchAnilistSuspenseQueryHookResult = ReturnType<typeof useSearchAnilistSuspenseQuery>;
-export type SearchAnilistQueryResult = Apollo.QueryResult<SearchAnilistQuery, SearchAnilistQueryVariables>;
+export type SearchAnilistQueryResult = Apollo.QueryResult<
+	SearchAnilistQuery,
+	SearchAnilistQueryVariables
+>;
 export function refetchSearchAnilistQuery(variables?: SearchAnilistQueryVariables) {
-      return { query: SearchAnilistDocument, variables: variables }
-    }
+	return { query: SearchAnilistDocument, variables: variables };
+}
 export const querySearchAnilist = (
 	options: Omit<Apollo.QueryOptions<SearchAnilistQueryVariables, SearchAnilistQuery>, 'query'>,
 ) =>

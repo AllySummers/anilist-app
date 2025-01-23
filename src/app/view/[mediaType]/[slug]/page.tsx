@@ -12,6 +12,7 @@ interface MediaItemPageParams {
 
 export default async function MediaItemPage({ params }: NextPageProps<MediaItemPageParams>) {
 	const user = await getUserAction();
+
 	if (!user) {
 		// middleware will redirect to /register if the user is not authenticated
 		return null;

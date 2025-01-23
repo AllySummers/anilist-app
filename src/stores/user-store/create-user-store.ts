@@ -1,4 +1,4 @@
-import { createStore, StoreApi } from 'zustand';
+import { createStore, type StoreApi } from 'zustand';
 
 export interface UserData {
 	username?: string;

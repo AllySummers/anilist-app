@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { getUserAction } from '@/actions/user/get-user';
 import { ApolloWrapper } from '@/apollo/wrapper';
 import { Provider as ChakraProvider } from '@/components/chakra-ui/provider';
+import { HydrateStores } from '@/components/hydrate-stores';
 import { Navigation } from '@/components/ui/navigation/navigation';
 import { navigationItems } from '@/config/navigation';
 import { siteInfo } from '@/config/site';
@@ -34,6 +35,7 @@ export default async function RootLayout({
 		// https://www.chakra-ui.com/docs/get-started/frameworks/next-app#optimize-bundle
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				<HydrateStores />
 				<ChakraProvider>
 					<UserStoreProvider value={user}>
 						<ApolloWrapper>
