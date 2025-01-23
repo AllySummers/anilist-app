@@ -1,7 +1,7 @@
-import type { RequiredUserData } from '@/types/user-data';
+import type { RequiredUserData } from '@/stores/user-store';
 
-export const parseUserCookieJson = (cookie?: string | null): RequiredUserData | null => {
-	if (!cookie) return null;
+export const parseUserCookieJson = (cookie?: string | null): RequiredUserData | undefined => {
+	if (!cookie) return undefined;
 
 	try {
 		// JSON.parse always returns `any` and we check it after this so this can be ignored
@@ -17,5 +17,5 @@ export const parseUserCookieJson = (cookie?: string | null): RequiredUserData | 
 		// if the cookie is invalid or missing, we can just return null so the user can log in again
 	}
 
-	return null;
+	return undefined;
 };

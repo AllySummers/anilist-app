@@ -1,7 +1,6 @@
 'use client';
 
-import { IconButton } from '@chakra-ui/react';
-import { Separator } from '@chakra-ui/react';
+import { IconButton, Separator } from '@chakra-ui/react';
 import Link from 'next/link';
 import { Avatar } from '@/components/chakra-ui/avatar';
 import {
@@ -11,10 +10,10 @@ import {
 	MenuRoot,
 	MenuTrigger,
 } from '@/components/chakra-ui/menu';
-import { useUser } from '@/context/user';
+import { useUserStore } from '@/stores/user-store';
 
 export const ProfileMenu = () => {
-	const userData = useUser();
+	const userData = useUserStore();
 
 	return (
 		<MenuRoot>

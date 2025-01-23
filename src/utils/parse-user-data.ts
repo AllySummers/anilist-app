@@ -1,4 +1,4 @@
-import type { UserData } from '@/types/user-data';
+import type { UserData } from '@/stores/user-store';
 
 export interface UserDataValid {
 	valid: true;

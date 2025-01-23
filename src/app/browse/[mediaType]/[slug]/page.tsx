@@ -1,7 +1,16 @@
 import { getUser } from '@/actions/get-user';
 import { queryAnilistDetails } from '@/gql/anilist-details.query';
+import { MediaType } from '@/types/media';
+import { NextPageProps } from '@/types/utility-types';
 
-export default async function AnimeItemPage({ params }: { params: Promise<{ slug: string }> }) {
+interface MediaItemPageParams {
+	params: {
+		mediaType: MediaType;
+		slug: string;
+	};
+}
+
+export default async function MediaItemPage({ params }: NextPageProps<MediaItemPageParams>) {
 	const user = await getUser();
 	if (!user) {
 		// middleware will redirect to /register if the user is not authenticated
@@ -10,7 +19,7 @@ export default async function AnimeItemPage({ params }: { params: Promise<{ slug
 
 	const { slug } = await params;
 	const data = await queryAnilistDetails({ variables: { id: Number(slug) } });
-	console.log(data.data.Media);
+	// console.log(data.data.Media);
 
 	return (
 		<>

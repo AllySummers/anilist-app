@@ -8,7 +8,7 @@ import { Provider as ChakraProvider } from '@/components/chakra-ui/provider';
 import { Navigation } from '@/components/ui/navigation/navigation';
 import { navigationItems } from '@/config/navigation';
 import { siteInfo } from '@/config/site';
-import { UserProvider } from '@/context/user';
+import { UserStoreProvider } from '@/stores/user-store/user-store-context';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -34,7 +34,7 @@ export default async function RootLayout({
 		// https://www.chakra-ui.com/docs/get-started/frameworks/next-app#optimize-bundle
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<UserProvider value={user}>
+				<UserStoreProvider value={user}>
 					<ApolloWrapper>
 						<ChakraProvider>
 							<SkipNavLink>Skip to Content</SkipNavLink>
@@ -51,7 +51,7 @@ export default async function RootLayout({
 							</Container>
 						</ChakraProvider>
 					</ApolloWrapper>
-				</UserProvider>
+				</UserStoreProvider>
 			</body>
 		</html>
 	);
