@@ -19,7 +19,7 @@ export const Hero = ({ heading }: HeroProps) => (
 			// not sure how to disable highlighting the underline :(
 			textDecoration="underline"
 			textUnderlineOffset="1rem"
-			textDecorationColor="gray"
+			textDecorationColor="fg"
 			position="absolute"
 			w="full"
 			display="block"
@@ -42,6 +42,7 @@ export const Hero = ({ heading }: HeroProps) => (
 			/>
 			<Separator
 				size="lg"
+				borderColor="blackAlpha.600"
 				variant="solid"
 				orientation={{ base: 'horizontal', md: 'vertical' }}
 			/>

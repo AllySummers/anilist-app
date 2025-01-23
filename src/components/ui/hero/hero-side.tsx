@@ -42,9 +42,9 @@ export const HeroSide = ({ imageSrc, linkHref, linkText }: HeroSideProps) => (
 		<Button
 			variant="outline"
 			size="2xl"
-			colorPalette="white"
+			colorPalette="bg"
 			borderStyle="solid"
-			borderColor="white"
+			borderColor="bg"
 			borderWidth="2px"
 			letterSpacing="widest"
 			fontSize="x-large"

@@ -2,7 +2,7 @@ import { Flex, SkipNavLink, Text } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
-import { getUserAction } from '@/actions/get-user';
+import { getUserAction } from '@/actions/user/get-user';
 import { ApolloWrapper } from '@/apollo/wrapper';
 import { Provider as ChakraProvider } from '@/components/chakra-ui/provider';
 import { Navigation } from '@/components/ui/navigation/navigation';

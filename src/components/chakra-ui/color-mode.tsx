@@ -1,17 +1,21 @@
 'use client';
 
 import type { IconButtonProps } from '@chakra-ui/react';
-import { ClientOnly, IconButton, Skeleton } from '@chakra-ui/react';
-import { Sun, Moon } from 'lucide-react';
+import { ClientOnly, IconButton } from '@chakra-ui/react';
+import { Sun, Moon, SunMoon } from 'lucide-react';
 import { ThemeProvider, useTheme } from 'next-themes';
 import type { ThemeProviderProps } from 'next-themes';
 import { forwardRef } from 'react';
 
 export type ColorModeProviderProps = ThemeProviderProps;
+export type Theme = 'light' | 'dark';
 
-export function ColorModeProvider(props: ColorModeProviderProps) {
-	return <ThemeProvider attribute="class" disableTransitionOnChange {...props} />;
-}
+export const ColorModeProvider = (props: ColorModeProviderProps) => (
+	<ThemeProvider attribute="class" disableTransitionOnChange {...props} />
+);
+
+export const isColorMode = (theme?: string): theme is Theme =>
+	theme === 'light' || theme === 'dark';
 
 export function useColorMode() {
 	const { resolvedTheme, setTheme } = useTheme();
@@ -19,15 +23,10 @@ export function useColorMode() {
 		setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
 	};
 	return {
-		colorMode: resolvedTheme,
+		colorMode: isColorMode(resolvedTheme) ? resolvedTheme : undefined,
 		setColorMode: setTheme,
 		toggleColorMode,
 	};
-}
-
-export function useColorModeValue<T>(light: T, dark: T) {
-	const { colorMode } = useColorMode();
-	return colorMode === 'light' ? light : dark;
 }
 
 export function ColorModeIcon() {
@@ -41,7 +40,20 @@ export const ColorModeButton = forwardRef<HTMLButtonElement, ColorModeButtonProp
 	function ColorModeButton(props, ref) {
 		const { toggleColorMode } = useColorMode();
 		return (
-			<ClientOnly fallback={<Skeleton boxSize="8" />}>
+			<ClientOnly
+				fallback={
+					<IconButton
+						variant="ghost"
+						disabled
+						aria-label="Loading theme options"
+						rounded="full"
+						size="md"
+						ref={ref}
+					>
+						<SunMoon />
+					</IconButton>
+				}
+			>
 				<IconButton
 					onClick={toggleColorMode}
 					variant="ghost"

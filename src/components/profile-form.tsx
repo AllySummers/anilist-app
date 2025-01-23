@@ -2,7 +2,7 @@
 
 import { VStack, Input, Fieldset, Button } from '@chakra-ui/react';
 import { useActionState } from 'react';
-import { setUserAction } from '@/actions/set-user';
+import { setUserAction } from '@/actions/user/set-user';
 import { Field } from '@/components/chakra-ui/field';
 import type { UserData } from '@/stores/user-store';
 

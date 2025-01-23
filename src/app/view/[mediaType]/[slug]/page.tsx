@@ -1,4 +1,4 @@
-import { getUserAction } from '@/actions/get-user';
+import { getUserAction } from '@/actions/user/get-user';
 import { queryAnilistDetails } from '@/gql/anilist-details.query';
 import { MediaType } from '@/types/media';
 import { NextPageProps } from '@/types/utility-types';

@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useEffect } from 'react';
-import { logoutUserAction } from '@/actions/logout-user';
+import { logoutUserAction } from '@/actions/user/logout-user';
 
 export default function LogoutPage() {
 	const router = useRouter();

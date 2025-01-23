@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { getUserAction } from '@/actions/get-user';
+import { getUserAction } from '@/actions/user/get-user';
 
 // using unprotected routes instead of protected routes because
 // `/` is a protected route, and everything starts with `/`, and

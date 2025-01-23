@@ -11,6 +11,7 @@ export function useUser<T extends UserStore = UserStore>(
 	const userStoreContext = useContext(UserStoreContext);
 
 	if (!userStoreContext) {
+		console.log({ userStoreContext });
 		throw new Error(`useUser must be used within UserStoreProvider`);
 	}
 

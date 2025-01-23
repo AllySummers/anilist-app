@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getUserAction } from '@/actions/get-user';
+import { getUserAction } from '@/actions/user/get-user';
 import { AnimeCardSkeleton } from '@/components/ui/skeletons/anime-card-skeleton';
 import { querySearchAnilist, type SearchAnilistQueryVariables } from '@/gql/anilist-search.query';
 import { isMediaType, MediaType } from '@/types/media';

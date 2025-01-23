@@ -1,5 +1,5 @@
 import { VStack, Heading } from '@chakra-ui/react';
-import { getUserAction } from '@/actions/get-user';
+import { getUserAction } from '@/actions/user/get-user';
 import { ProfileForm } from '@/components/profile-form';
 import { siteInfo } from '@/config/site';
 
