@@ -1,4 +1,4 @@
-import { getUser } from '@/actions/get-user';
+import { getUserAction } from '@/actions/get-user';
 import { queryAnilistDetails } from '@/gql/anilist-details.query';
 import { MediaType } from '@/types/media';
 import { NextPageProps } from '@/types/utility-types';
@@ -11,7 +11,7 @@ interface MediaItemPageParams {
 }
 
 export default async function MediaItemPage({ params }: NextPageProps<MediaItemPageParams>) {
-	const user = await getUser();
+	const user = await getUserAction();
 	if (!user) {
 		// middleware will redirect to /register if the user is not authenticated
 		return null;

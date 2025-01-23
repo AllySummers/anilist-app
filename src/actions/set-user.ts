@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import { cookieOptions } from '@/config/cookie-options';
 import { parseUserData, type ParsedUserData } from '@/utils/parse-user-data';
 
-export const setUser = async (
+export const setUserAction = async (
 	_prevState: ParsedUserData,
 	data: FormData,
 ): Promise<ParsedUserData> => {

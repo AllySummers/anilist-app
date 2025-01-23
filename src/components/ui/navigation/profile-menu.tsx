@@ -10,10 +10,10 @@ import {
 	MenuRoot,
 	MenuTrigger,
 } from '@/components/chakra-ui/menu';
-import { useUserStore } from '@/stores/user-store';
+import { useUser } from '@/stores/user-store';
 
 export const ProfileMenu = () => {
-	const userData = useUserStore();
+	const user = useUser();
 
 	return (
 		<MenuRoot>
@@ -28,13 +28,13 @@ export const ProfileMenu = () => {
 					{/* if users had a profile picture, we should
 					change this to an iamge component if it is
 					 exists, but using a static icon for now. */}
-					<Avatar name={userData?.username} />
+					<Avatar name={user?.username} />
 				</IconButton>
 			</MenuTrigger>
 			<MenuContent>
-				{userData ? (
+				{user?.username ? (
 					<>
-						<MenuItemGroup title={`${userData.username}'s Account`}>
+						<MenuItemGroup title={`${user.username}'s Account`}>
 							<MenuItem value="profile-button" asChild>
 								<Link href="/profile">Profile</Link>
 							</MenuItem>

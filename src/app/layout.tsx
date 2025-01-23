@@ -1,8 +1,8 @@
-import { Container, SkipNavLink, Text } from '@chakra-ui/react';
+import { Flex, SkipNavLink, Text } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
-import { getUser } from '@/actions/get-user';
+import { getUserAction } from '@/actions/get-user';
 import { ApolloWrapper } from '@/apollo/wrapper';
 import { Provider as ChakraProvider } from '@/components/chakra-ui/provider';
 import { Navigation } from '@/components/ui/navigation/navigation';
@@ -27,16 +27,16 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const user = await getUser();
+	const user = await getUserAction();
 
 	return (
 		// suppression hydration warning is required to prevent warnings about the next-themes library, and recommended by chakra ui docs:
 		// https://www.chakra-ui.com/docs/get-started/frameworks/next-app#optimize-bundle
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<UserStoreProvider value={user}>
-					<ApolloWrapper>
-						<ChakraProvider>
+				<ChakraProvider>
+					<UserStoreProvider value={user}>
+						<ApolloWrapper>
 							<SkipNavLink>Skip to Content</SkipNavLink>
 							<Navigation
 								brand={
@@ -46,12 +46,12 @@ export default async function RootLayout({
 								}
 								items={navigationItems}
 							/>
-							<Container m="0" p="0">
+							<Flex m="0" mt="8" p="0" justify="center">
 								{children}
-							</Container>
-						</ChakraProvider>
-					</ApolloWrapper>
-				</UserStoreProvider>
+							</Flex>
+						</ApolloWrapper>
+					</UserStoreProvider>
+				</ChakraProvider>
 			</body>
 		</html>
 	);

@@ -1,10 +1,10 @@
 import { VStack, Heading } from '@chakra-ui/react';
-import { getUser } from '@/actions/get-user';
+import { getUserAction } from '@/actions/get-user';
 import { ProfileForm } from '@/components/profile-form';
 import { siteInfo } from '@/config/site';
 
 export default async function ProfilePage() {
-	const user = await getUser();
+	const user = await getUserAction();
 
 	if (!user) {
 		// middleware will redirect to /register if the user is not authenticated

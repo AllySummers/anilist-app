@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getUser } from '@/actions/get-user';
+import { getUserAction } from '@/actions/get-user';
 import { querySearchAnilist, type SearchAnilistQueryVariables } from '@/gql/anilist-search.query';
 import { isMediaType, MediaType } from '@/types/media';
 import { NextPageProps } from '@/types/utility-types';
@@ -19,7 +19,7 @@ export default async function MediaPage(props: NextPageProps<MediaPageParams>) {
 		notFound();
 	}
 
-	const user = await getUser();
+	const user = await getUserAction();
 
 	if (!user) {
 		// middleware will redirect to /register if the user is not authenticated

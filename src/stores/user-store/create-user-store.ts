@@ -1,4 +1,4 @@
-import { createStore, StoreApi } from 'zustand/vanilla';
+import { createStore, StoreApi } from 'zustand';
 
 export interface UserData {
 	username?: string;
@@ -7,20 +7,18 @@ export interface UserData {
 
 export type RequiredUserData = Required<UserData>;
 
-export type UserState = UserData | RequiredUserData;
+export type UserStore = UserData | RequiredUserData;
 
 export interface UserActions {
-	setUser: (data: UserState) => void;
+	loginUser: (data: UserData) => void;
+	logoutUser: () => void;
 }
-
-export type UserStore = UserState & UserActions;
 
 export type UserStoreAPI = StoreApi<UserStore>;
 
-export const initUserState: UserState = {};
+export const initUserState: UserStore = {};
 
-export const createUserStore = (initState: UserState = initUserState) =>
-	createStore<UserStore>()((set) => ({
+export const createUserStore = (initState: UserStore = initUserState) =>
+	createStore<UserStore>()(() => ({
 		...initState,
-		setUser: (data) => set(data),
 	}));

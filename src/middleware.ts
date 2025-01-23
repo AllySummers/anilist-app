@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/actions/get-user';
+import { getUserAction } from '@/actions/get-user';
 
 // using unprotected routes instead of protected routes because
 // `/` is a protected route, and everything starts with `/`, and
@@ -16,7 +16,7 @@ export default async function middleware(req: NextRequest) {
 	const path = req.nextUrl.pathname;
 	const isProtectedRoute = !unprotectedRoutes.some((route) => path.startsWith(route));
 
-	const user = await getUser();
+	const user = await getUserAction();
 
 	if (user) {
 		res.cookies.set('user-data', JSON.stringify(user), { httpOnly: true, path: '/' });
