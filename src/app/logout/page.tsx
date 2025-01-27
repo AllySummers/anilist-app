@@ -1,30 +1,12 @@
-'use client';
-import { VStack, Heading, Text, Link } from '@chakra-ui/react';
-import NextLink from 'next/link';
-import { useRouter } from 'next/navigation';
+import type { Metadata } from 'next';
+import { Logout } from '@/components/logout';
+import { siteInfo } from '@/config/site';
 
-import { useEffect } from 'react';
-import { logoutUserAction } from '@/actions/user/logout-user';
+export const metadata = {
+	// it doesn't use the template when you statically set the title
+	title: `Logging you out... | ${siteInfo.title.default}`,
+} as Metadata;
 
 export default function LogoutPage() {
-	const router = useRouter();
-
-	useEffect(() => {
-		void logoutUserAction().then(() => {
-			router.refresh();
-		});
-	}, [router]);
-
-	return (
-		<VStack gap={12}>
-			<Heading as="h1">Successfully logged out</Heading>
-			<Text>
-				To continue using the application, please{' '}
-				<Link variant="underline" colorPalette="teal" asChild>
-					<NextLink href="/register">sign in again</NextLink>
-				</Link>
-				.
-			</Text>
-		</VStack>
-	);
+	return <Logout />;
 }

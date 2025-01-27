@@ -106,3 +106,8 @@ export const uppercaseMediaType = (type: MediaType | Uppercase<MediaType>): Uppe
 
 export const lowercaseMediaType = (type: MediaType | Uppercase<MediaType>): Lowercase<MediaType> =>
 	type.toLowerCase() as Lowercase<MediaType>;
+
+export const titlecaseMediaType = ([firstChar, ...restChars]:
+	| MediaType
+	| Uppercase<MediaType>): Capitalize<MediaType> =>
+	[firstChar.toUpperCase(), ...restChars].join('') as Capitalize<MediaType>;

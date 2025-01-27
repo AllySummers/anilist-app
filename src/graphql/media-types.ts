@@ -1,9 +1,9 @@
 import type * as Types from '@/gql';
 
 // preferring to avoid enums but wanting to make sure it is up to date with the gql schema
-export type MediaType = `${Lowercase<(typeof MEDIA_TYPES)[number]>}`;
+export type MediaType = `${Lowercase<Types.MediaType>}`;
 
-export const MEDIA_TYPES = ['anime', 'manga'] as const;
+export const MEDIA_TYPES = ['anime', 'manga'] as const satisfies ReadonlyArray<MediaType>;
 
 export const isMediaType = (value?: unknown): value is MediaType =>
 	typeof value === 'string' && MEDIA_TYPES.includes(value as MediaType);

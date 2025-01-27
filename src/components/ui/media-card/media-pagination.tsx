@@ -44,8 +44,6 @@ export const MediaPagination = ({ page, mediaType }: MediaPaginationProps) => {
 		return null;
 	}
 
-	console.log('total', { total, page });
-
 	return (
 		<PaginationRoot
 			display="flex"

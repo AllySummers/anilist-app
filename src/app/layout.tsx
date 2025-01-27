@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 							<Navigation
 								brand={
 									<Link href="/">
-										<Text as="span">{siteInfo.title}</Text>
+										<Text as="span">{siteInfo.title.default}</Text>
 									</Link>
 								}
 								items={navigationItems}
