@@ -66,7 +66,10 @@ export const MediaDetailModal = ({ media }: MediaDetailModalProps) => {
 				</DialogHeader>
 				<DialogBody gap="3" pt="5" flexDirection="column" display="flex">
 					<MediaCardBannerImage src={bannerImage} isAdult={isAdult} alt={title} />
-					<Grid templateColumns="2fr min-content 1fr" gap="inherit">
+					<Grid
+						templateColumns={{ base: 'auto', md: '4fr min-content 3fr' }}
+						gap="inherit"
+					>
 						<Flex direction="column" flex="1" gap="inherit" justify="space-between">
 							<DataListRoot
 								orientation="horizontal"

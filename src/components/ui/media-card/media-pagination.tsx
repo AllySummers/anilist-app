@@ -16,12 +16,12 @@ export interface MediaPaginationProps {
 }
 
 const getPageTotal = (page?: PageInfo) => {
-	if (typeof page?.total === 'number' && typeof page?.perPage === 'number') {
-		return page.total / page.perPage;
-	}
-
 	if (typeof page?.lastPage === 'number' && typeof page.perPage === 'number') {
 		return page.lastPage * page.perPage;
+	}
+
+	if (typeof page?.total === 'number' && typeof page?.perPage === 'number') {
+		return page.total / page.perPage;
 	}
 
 	if (
@@ -43,6 +43,8 @@ export const MediaPagination = ({ page, mediaType }: MediaPaginationProps) => {
 	if (!page || typeof total !== 'number') {
 		return null;
 	}
+
+	console.log('total', { total, page });
 
 	return (
 		<PaginationRoot

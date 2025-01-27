@@ -1,7 +1,7 @@
 import { HStack } from '@chakra-ui/react';
 import { DataListItem, type ItemProps } from '@/components/chakra-ui/data-list';
 import type { MediaStudio } from '@/graphql/media-types';
-import { TagList } from '../../lists/tag-list';
+import { TagList } from '../../tag-list';
 import { useList } from '../use-list';
 
 export interface StudiosProps extends Omit<ItemProps, 'label' | 'value'> {

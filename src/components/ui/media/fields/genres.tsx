@@ -1,6 +1,6 @@
 import { HStack } from '@chakra-ui/react';
 import { DataListItem, type ItemProps } from '@/components/chakra-ui/data-list';
-import { TagList } from '../../lists/tag-list';
+import { TagList } from '../../tag-list';
 import { useList } from '../use-list';
 
 export interface GenresProps extends Omit<ItemProps, 'label' | 'value'> {

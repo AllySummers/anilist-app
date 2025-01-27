@@ -1,4 +1,5 @@
-import { Card, Flex, Grid, Heading, Separator } from '@chakra-ui/react';
+'use client';
+import { Card, Center, ClientOnly, Flex, Grid, Heading, Separator } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { DataListRoot } from '@/components/chakra-ui/data-list';
 import { Prose } from '@/components/chakra-ui/prose';
@@ -31,69 +32,83 @@ export const MediaDetails = ({
 	const title = useMemo(() => getTitle(mediaTitle), [mediaTitle]);
 
 	return (
-		<Card.Root mx="8" mb="8">
-			<Card.Header>
-				<Flex justify="space-between" align="start">
-					<Tooltip content={title}>
-						<Card.Title lineClamp="2">{title}</Card.Title>
-					</Tooltip>
-					<Flex
-						direction="column"
-						justifyContent="space-between"
-						gap="1"
-						align="end"
-						marginRight="5"
-					>
-						{isAdult && <MediaAdult />}
-						{meanScore >= 50 && <MediaScore score={meanScore} steps={[50, 70, 90]} />}
-					</Flex>
-				</Flex>
-			</Card.Header>
-			<Card.Body gap="3" pt="5" flexDirection="column" display="flex">
-				<MediaCardBannerImage src={bannerImage} isAdult={isAdult} alt={title} />
-				<Grid templateColumns="2fr min-content 1fr" gap="inherit">
-					<Flex direction="column" flex="1" gap="inherit" justify="space-between">
-						<DataListRoot
-							orientation="horizontal"
-							variant="subtle"
-							gap="3"
-							alignContent="start"
-							divideY="1px"
+		<ClientOnly>
+			<Center>
+				<Card.Root
+					mx="8"
+					mb="8"
+					maxWidth={{ base: 'full', lg: 'breakpoint-2xl' }}
+					justifyContent="center"
+				>
+					<Card.Header>
+						<Flex justify="space-between" align="start">
+							<Tooltip content={title}>
+								<Card.Title lineClamp="2">{title}</Card.Title>
+							</Tooltip>
+							<Flex
+								direction="column"
+								justifyContent="space-between"
+								gap="1"
+								align="end"
+								marginRight="5"
+							>
+								{isAdult && <MediaAdult />}
+								{meanScore >= 50 && (
+									<MediaScore score={meanScore} steps={[50, 70, 90]} />
+								)}
+							</Flex>
+						</Flex>
+					</Card.Header>
+					<Card.Body gap="3" pt="5" flexDirection="column" display="flex">
+						<MediaCardBannerImage src={bannerImage} isAdult={isAdult} alt={title} />
+						<Grid
+							templateColumns={{ base: 'auto', md: '4fr min-content 3fr' }}
+							gap="inherit"
 						>
-							<SummaryDataList pt="2" alignItems="start" media={media} />
-						</DataListRoot>
-						<Separator />
-						{description && (
-							<Card.Description asChild>
-								<Prose>{description}</Prose>
-							</Card.Description>
+							<Flex direction="column" flex="1" gap="inherit" justify="space-between">
+								<DataListRoot
+									orientation="horizontal"
+									variant="subtle"
+									gap="3"
+									alignContent="start"
+									divideY="1px"
+								>
+									<SummaryDataList pt="2" alignItems="start" media={media} />
+								</DataListRoot>
+								<Separator />
+								{description && (
+									<Card.Description asChild>
+										<Prose>{description}</Prose>
+									</Card.Description>
+								)}
+							</Flex>
+							<Separator orientation="vertical" />
+							<Flex direction="column" gap="3" alignItems="end">
+								<Heading
+									size="xl"
+									alignSelf="center"
+									textDecoration="underline"
+									textDecorationColor="whiteAlpha.700"
+								>
+									Additional Info
+								</Heading>
+								<DataListRoot orientation="horizontal" variant="subtle" gap="2">
+									<DetailDataList media={media} />
+								</DataListRoot>
+							</Flex>
+						</Grid>
+					</Card.Body>
+					<Card.Footer>
+						{type && (
+							<ShareMediaButton
+								type={lowercaseMediaType(type)}
+								slug={id}
+								shareTitle={title}
+							/>
 						)}
-					</Flex>
-					<Separator orientation="vertical" />
-					<Flex direction="column" gap="3" alignItems="end">
-						<Heading
-							size="xl"
-							alignSelf="center"
-							textDecoration="underline"
-							textDecorationColor="whiteAlpha.700"
-						>
-							Additional Info
-						</Heading>
-						<DataListRoot orientation="horizontal" variant="subtle" gap="2">
-							<DetailDataList media={media} />
-						</DataListRoot>
-					</Flex>
-				</Grid>
-			</Card.Body>
-			<Card.Footer>
-				{type && (
-					<ShareMediaButton
-						type={lowercaseMediaType(type)}
-						slug={id}
-						shareTitle={title}
-					/>
-				)}
-			</Card.Footer>
-		</Card.Root>
+					</Card.Footer>
+				</Card.Root>
+			</Center>
+		</ClientOnly>
 	);
 };

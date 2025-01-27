@@ -29,7 +29,7 @@ export const Hero = ({ heading }: HeroProps) => (
 			textAlign="center"
 			right={0}
 			as="h1"
-			size="3xl"
+			size={{ base: '2xl', sm: '3xl' }}
 		>
 			{heading}
 		</Heading>
