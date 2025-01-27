@@ -13,6 +13,9 @@ const compat = new FlatCompat({
 });
 
 const config = tseslint.config([
+	{
+		ignores: ['.next'],
+	},
 	...compat.extends('next/core-web-vitals', 'next/typescript'),
 	prettierConfig,
 	{
@@ -82,8 +85,11 @@ const config = tseslint.config([
 		},
 	},
 	{
-		files: ['src/graphql/__generated__/**/*.ts', 'src/graphql/__generated__/**/*.tsx'],
+		files: ['src/graphql/__generated__/*.ts'],
+		// disable type checking for generated files, as it makes eslint slow
+		...tseslint.configs.disableTypeChecked,
 		rules: {
+			...tseslint.configs.disableTypeChecked.rules,
 			'@typescript-eslint/no-explicit-any': 'off',
 			'@typescript-eslint/no-redundant-type-constituents': 'off',
 		},

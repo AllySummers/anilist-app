@@ -47,7 +47,7 @@ export const Hero = ({ heading }: HeroProps) => (
 				orientation={{ base: 'horizontal', md: 'vertical' }}
 			/>
 			<HeroSide
-				linkHref="/manga"
+				linkHref="/browse/manga"
 				linkText="View Manga"
 				imageSrc="https://images.unsplash.com/photo-1613376023733-0a73315d9b06"
 			/>

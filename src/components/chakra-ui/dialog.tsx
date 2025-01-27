@@ -1,5 +1,5 @@
 import { Dialog as ChakraDialog, Portal } from '@chakra-ui/react';
-import { forwardRef, type RefObject } from 'react';
+import { type RefObject, forwardRef } from 'react';
 import { CloseButton } from './close-button';
 
 interface DialogContentProps extends ChakraDialog.ContentProps {

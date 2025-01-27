@@ -1,6 +1,7 @@
-import { AnimeCardSkeleton } from '@/components/ui/skeletons/anime-card-skeleton';
+import { MediaCardBrowser } from '@/components/ui/media-card/media-card-browser';
 
 export default function Loading() {
-	// You can add any UI inside Loading, including a Skeleton.
-	return <AnimeCardSkeleton />;
+	// this component is used to render a loading state for the media card browser,
+	// so it shouldn't matter if the media type is hard coded
+	return <MediaCardBrowser mediaType="anime" allowSkeleton />;
 }

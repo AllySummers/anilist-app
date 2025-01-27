@@ -20,8 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/gql/*": ["./src/graphql/__generated__/*"],
-      "@/gql": ["./src/graphql/types.ts"],
+      "@/gql/*": ["./src/graphql/__generated__/*", "./src/graphql/*"],
+      "@/gql": ["./src/graphql/__generated__/types.ts"],
       "@/stores/user-store": ["./src/stores/user-store/user-store.ts"],
       "@/stores/settings-store": ["./src/stores/settings-store/settings-store.ts"]
     }

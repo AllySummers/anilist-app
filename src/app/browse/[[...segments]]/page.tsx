@@ -1,9 +1,13 @@
-import { Flex } from '@chakra-ui/react';
 import { notFound } from 'next/navigation';
 import { getUserAction } from '@/actions/user/get-user';
-import { AnimeCardSkeleton } from '@/components/ui/skeletons/anime-card-skeleton';
+import { MediaCardBrowser } from '@/components/ui/media-card/media-card-browser';
 import { querySearchAnilist } from '@/gql/anilist-search.query';
-import { isMediaType, MediaType } from '@/types/media';
+import { MediaType as AniDBMediaType, MediaSort } from '@/gql/types';
+import {
+	searchAnilistQueryMediaTransformer,
+	searchAnilistQueryPageTransformer,
+} from '@/graphql/data-transformers/query-media-result';
+import { isMediaType, type MediaType } from '@/graphql/media-types';
 import { NextPageProps } from '@/types/utility-types';
 
 interface MediaPageParams {
@@ -18,9 +22,9 @@ export default async function MediaPage(props: NextPageProps<MediaPageParams>) {
 	// uncomment this to be able to populate search boxes from the query string
 	// const searchParams = await props.searchParams;
 	const {
-		segments: [mediaType = 'anime', page = '1'],
+		segments: [mediaType = 'anime', pageNumberParam = '1'],
 	} = await props.params;
-	const pageNum = Number(page);
+	const pageNum = Number(pageNumberParam);
 
 	if (pageNum < 1 || Number.isNaN(pageNum) || !isMediaType(mediaType)) {
 		notFound();
@@ -33,13 +37,19 @@ export default async function MediaPage(props: NextPageProps<MediaPageParams>) {
 		return null;
 	}
 
-	// const { data } = await querySearchAnilist({});
+	const { data } = await querySearchAnilist({
+		variables: {
+			page: pageNum,
+			type: mediaType === 'anime' ? AniDBMediaType.Anime : AniDBMediaType.Manga,
+			sort: MediaSort.ScoreDesc,
+		},
+	});
+	// removing any null/undefined values from the media array
+	const media = data.Page?.media
+		?.flatMap((media) => (media ? searchAnilistQueryMediaTransformer(media) : []))
+		.sort((a, b) => Number(b.isAdult) + Number(a.isAdult));
 
-	return (
-		<Flex wrap="wrap" gap={8}>
-			{Array.from({ length: 100 }).map((_, i) => (
-				<AnimeCardSkeleton key={i} />
-			))}
-		</Flex>
-	);
+	const page = searchAnilistQueryPageTransformer(data.Page?.pageInfo ?? {});
+
+	return <MediaCardBrowser media={media} page={page} mediaType={mediaType} />;
 }

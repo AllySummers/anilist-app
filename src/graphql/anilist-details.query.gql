@@ -10,6 +10,7 @@ query AnilistDetails($id: Int, $type: MediaType, $isAdult: Boolean) {
 		coverImage {
 			extraLarge
 			large
+			medium
 		}
 		bannerImage
 		startDate {
@@ -23,8 +24,6 @@ query AnilistDetails($id: Int, $type: MediaType, $isAdult: Boolean) {
 			day
 		}
 		description
-		season
-		seasonYear
 		type
 		format
 		status(version: 2)
@@ -36,24 +35,13 @@ query AnilistDetails($id: Int, $type: MediaType, $isAdult: Boolean) {
 		synonyms
 		source(version: 3)
 		isAdult
-		isLocked
 		meanScore
 		averageScore
 		popularity
 		favourites
-		isFavouriteBlocked
+		trending
 		hashtag
 		countryOfOrigin
-		isLicensed
-		isFavourite
-		isRecommendationBlocked
-		isFavouriteBlocked
-		isReviewBlocked
-		nextAiringEpisode {
-			airingAt
-			timeUntilAiring
-			episode
-		}
 		characterPreview: characters(perPage: 6, sort: [ROLE, RELEVANCE, ID]) {
 			edges {
 				id
@@ -65,9 +53,6 @@ query AnilistDetails($id: Int, $type: MediaType, $isAdult: Boolean) {
 						userPreferred
 					}
 					language: languageV2
-					image {
-						large
-					}
 				}
 				node {
 					id
@@ -76,11 +61,12 @@ query AnilistDetails($id: Int, $type: MediaType, $isAdult: Boolean) {
 					}
 					image {
 						large
+						medium
 					}
 				}
 			}
 		}
-		studios {
+		studios(sort: [FAVOURITES_DESC]) {
 			edges {
 				isMain
 				node {
@@ -89,37 +75,6 @@ query AnilistDetails($id: Int, $type: MediaType, $isAdult: Boolean) {
 				}
 			}
 		}
-		externalLinks {
-			id
-			site
-			url
-			type
-			language
-			color
-			icon
-			notes
-			isDisabled
-		}
-		streamingEpisodes {
-			site
-			title
-			thumbnail
-			url
-		}
-		trailer {
-			id
-			site
-		}
-		rankings {
-			id
-			rank
-			type
-			format
-			year
-			season
-			allTime
-			context
-		}
 		tags {
 			id
 			name
@@ -127,7 +82,6 @@ query AnilistDetails($id: Int, $type: MediaType, $isAdult: Boolean) {
 			rank
 			isMediaSpoiler
 			isGeneralSpoiler
-			userId
 		}
 		mediaListEntry {
 			id

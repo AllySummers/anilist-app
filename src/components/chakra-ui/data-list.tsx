@@ -4,7 +4,7 @@ import { InfoTip } from './toggle-tip';
 
 export const DataListRoot = ChakraDataList.Root;
 
-interface ItemProps extends ChakraDataList.ItemProps {
+export interface ItemProps extends ChakraDataList.ItemProps {
 	label: ReactNode;
 	value: ReactNode;
 	info?: ReactNode;

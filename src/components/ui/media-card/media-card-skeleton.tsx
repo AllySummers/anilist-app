@@ -1,42 +1,52 @@
-import { Box, VStack, HStack } from '@chakra-ui/react';
-import { SkeletonText, Skeleton } from '@/components/chakra-ui/skeleton';
+'use client';
+import { Card, Flex, Separator, Button } from '@chakra-ui/react';
+import { DataListRoot, DataListItem } from '@/components/chakra-ui/data-list';
+import { Skeleton, SkeletonText } from '@/components/chakra-ui/skeleton';
 
-export const AnimeCardSkeleton = () => (
-	<Box
-		borderWidth="1px"
-		borderRadius="lg"
-		overflow="hidden"
-		bg="fg"
-		shadow="md"
-		w="full"
-		maxW="400px"
-	>
-		{/* Skeleton Banner */}
-		<Skeleton h="200px" w="full" />
-
-		{/* Skeleton Content */}
-		<VStack align="start" gap={4} p={4}>
-			{/* Title and Badge */}
-			<HStack justify="space-between" w="full">
-				<Skeleton h="20px" w="70%" />
-				<Skeleton h="20px" w="15%" />
-			</HStack>
-
-			{/* Native Title */}
-			<Skeleton h="16px" w="50%" />
-
-			{/* Description */}
-			<SkeletonText noOfLines={3} gap={2} />
-
-			{/* Duration */}
-			<Skeleton h="16px" w="40%" />
-
-			{/* Genres */}
-			<HStack wrap="wrap" gap={2}>
-				<Skeleton h="24px" w="60px" borderRadius="md" />
-				<Skeleton h="24px" w="60px" borderRadius="md" />
-				<Skeleton h="24px" w="60px" borderRadius="md" />
-			</HStack>
-		</VStack>
-	</Box>
+export const MediaCardSkeleton = () => (
+	<Card.Root width="360px">
+		<Card.Header>
+			<Card.Title lineClamp="2">
+				<SkeletonText noOfLines={1} />
+			</Card.Title>
+		</Card.Header>
+		<Card.Body gap="3" pt="5" flexDirection="column">
+			<Skeleton width="full" height="2xs" shadow="xl" marginBottom="2" />
+			<Flex direction="column" flex="1" gap="0" justify="space-between">
+				<DataListRoot orientation="horizontal" variant="subtle" gap="2">
+					<DataListItem
+						label={<SkeletonText noOfLines={1} />}
+						value={<SkeletonText noOfLines={1} />}
+					/>
+					<DataListItem
+						label={<SkeletonText noOfLines={1} />}
+						value={<SkeletonText noOfLines={1} />}
+					/>
+					<DataListItem
+						label={<SkeletonText noOfLines={1} />}
+						value={<SkeletonText noOfLines={1} />}
+					/>
+					<DataListItem
+						label={<SkeletonText noOfLines={1} />}
+						value={<SkeletonText noOfLines={1} />}
+					/>
+					<DataListItem
+						label={<SkeletonText noOfLines={1} />}
+						value={<SkeletonText noOfLines={1} />}
+					/>
+				</DataListRoot>
+			</Flex>
+			<Flex direction="column" flex="1" gap="inherit" justify="end">
+				<Separator />
+				<Card.Description lineClamp="3" asChild>
+					<SkeletonText noOfLines={3} />
+				</Card.Description>
+			</Flex>
+		</Card.Body>
+		<Card.Footer justifyContent="flex-end">
+			<Button variant="outline" disabled pointerEvents="none">
+				<SkeletonText noOfLines={1} />
+			</Button>
+		</Card.Footer>
+	</Card.Root>
 );

@@ -3,7 +3,7 @@ query SearchAnilist(
 	$page: Int = 1
 	$id: Int
 	$type: MediaType
-	$isAdult: Boolean = false
+	$isAdult: Boolean
 	$search: String
 	$format: [MediaFormat]
 	$status: MediaStatus
@@ -66,11 +66,11 @@ query SearchAnilist(
 			isLicensed: $isLicensed
 			genre_in: $genres
 			genre_not_in: $excludedGenres
+			isAdult: $isAdult
 			tag_in: $tags
 			tag_not_in: $excludedTags
 			minimumTagRank: $minimumTagRank
 			sort: $sort
-			isAdult: $isAdult
 		) {
 			id
 			title {
@@ -81,7 +81,7 @@ query SearchAnilist(
 			coverImage {
 				extraLarge
 				large
-				color
+				medium
 			}
 			startDate {
 				year
@@ -93,24 +93,16 @@ query SearchAnilist(
 				month
 				day
 			}
-			bannerImage
-			season
-			seasonYear
 			description
 			type
 			format
 			status(version: 2)
-			episodes
 			duration
 			genres
+			meanScore
 			isAdult
-			popularity
-			nextAiringEpisode {
-				airingAt
-				timeUntilAiring
-				episode
-			}
-			studios(isMain: true) {
+			meanScore
+			studios(sort: [FAVOURITES_DESC]) {
 				edges {
 					isMain
 					node {

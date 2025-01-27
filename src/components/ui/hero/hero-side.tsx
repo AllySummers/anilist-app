@@ -1,13 +1,17 @@
 import { Button, Flex } from '@chakra-ui/react';
-import Link from 'next/link';
+import Link, { type LinkProps } from 'next/link';
 
-export interface HeroSideProps {
+export interface HeroSideProps<RouteInferType> {
 	imageSrc: string;
 	linkText: string;
-	linkHref: string;
+	linkHref: LinkProps<RouteInferType>['href'];
 }
 
-export const HeroSide = ({ imageSrc, linkHref, linkText }: HeroSideProps) => (
+export const HeroSide = <RouteInferType,>({
+	imageSrc,
+	linkHref,
+	linkText,
+}: HeroSideProps<RouteInferType>) => (
 	<Flex
 		w="full"
 		h="full"

@@ -1,6 +1,9 @@
+import { notFound } from 'next/navigation';
 import { getUserAction } from '@/actions/user/get-user';
+import { MediaDetails } from '@/components/ui/media-detail/media-details';
 import { queryAnilistDetails } from '@/gql/anilist-details.query';
-import { MediaType } from '@/types/media';
+import { detailsAnilistQueryMediaTransformer } from '@/graphql/data-transformers/details-query-result';
+import { isMediaType, type MediaType } from '@/graphql/media-types';
 import { NextPageProps } from '@/types/utility-types';
 
 interface MediaItemPageParams {
@@ -13,21 +16,23 @@ interface MediaItemPageParams {
 export default async function MediaItemPage({ params }: NextPageProps<MediaItemPageParams>) {
 	const user = await getUserAction();
 
+	const { slug, mediaType } = await params;
+
+	if (!isMediaType(mediaType)) {
+		notFound();
+	}
+
 	if (!user) {
 		// middleware will redirect to /register if the user is not authenticated
 		return null;
 	}
 
-	const { slug } = await params;
 	const data = await queryAnilistDetails({ variables: { id: Number(slug) } });
-	// console.log(data.data.Media);
+	const media = data.data.Media && detailsAnilistQueryMediaTransformer(data.data.Media);
 
-	return (
-		<>
-			Viewing item {slug}
-			<pre>
-				<code>{JSON.stringify(data)}</code>
-			</pre>
-		</>
-	);
+	if (!media) {
+		notFound();
+	}
+
+	return <MediaDetails media={media} />;
 }
