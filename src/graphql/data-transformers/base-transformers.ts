@@ -33,8 +33,5 @@ export const nonNullableKeys = <T, K extends keyof T>(
 		}
 	}
 
-	if ('trending' in result && result.trending !== 0) {
-		console.log('trending', result.trending, { result, object, keys });
-	}
 	return result;
 };

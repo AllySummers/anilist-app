@@ -14,7 +14,10 @@ import type { NavigationViewpointProps } from './navigation';
 import { NavigationLinks } from './navigation-links';
 import { ProfileMenu } from './profile-menu';
 
-export const MobileNavigation = ({ items, brand }: NavigationViewpointProps) => {
+export const MobileNavigation = <T extends string>({
+	items,
+	brand,
+}: NavigationViewpointProps<T>) => {
 	const { open, onOpen, onToggle } = useDisclosure();
 
 	return (

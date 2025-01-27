@@ -4,7 +4,10 @@ import type { NavigationViewpointProps } from './navigation';
 import { NavigationLinks } from './navigation-links';
 import { ProfileMenu } from './profile-menu';
 
-export const DesktopNavigation = ({ items, brand }: NavigationViewpointProps) => (
+export const DesktopNavigation = <T extends string>({
+	items,
+	brand,
+}: NavigationViewpointProps<T>) => (
 	<Box px={4} shadow="sm" hideBelow="md">
 		<Flex h={16} alignItems="center" justifyContent="space-between">
 			<Text fontSize="xl" fontWeight="bold">

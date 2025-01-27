@@ -6,13 +6,17 @@ import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';
 import type { MenuItem } from './navigation';
 
-interface NavigationLinksProps {
-	items: MenuItem[];
+interface NavigationLinksProps<T extends string> {
+	items: MenuItem<T>[];
 	isMobile?: boolean;
 	buttonProps?: ButtonProps;
 }
 
-export const NavigationLinks = ({ items, buttonProps, isMobile }: NavigationLinksProps) => {
+export const NavigationLinks = <T extends string>({
+	items,
+	buttonProps,
+	isMobile,
+}: NavigationLinksProps<T>) => {
 	const activeRoute = usePathname();
 
 	return (
